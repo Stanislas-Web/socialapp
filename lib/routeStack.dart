@@ -69,8 +69,8 @@ Widget bottomNavigationBar(_selectedIndex, _onItemTapped) {
             title: new Text('Home', style: TextStyle(color: Color(0xFF262F56))),
             icon: SvgPicture.asset(
               'assets/icons/home.svg',
-              height: _selectedIndex == 0 ? 20.0 : 15,
-              width: _selectedIndex == 0 ? 20.0 : 15,
+              height: _selectedIndex == 1 ? 20.0 : 15,
+              width: _selectedIndex == 1 ? 20.0 : 15,
               color: _selectedIndex == 0
                   ? Color(0xFF262F56)
                   : Color(0xFF262F56).withOpacity(.5),
