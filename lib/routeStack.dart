@@ -52,12 +52,12 @@ class _RouteStackState extends State<RouteStack> {
 Widget bottomNavigationBar(_selectedIndex, _onItemTapped) {
   return ClipRRect(
     borderRadius: BorderRadius.only(
-      topRight: Radius.circular(40),
-      topLeft: Radius.circular(40),
+      // topRight: Radius.circular(40),
+      // topLeft: Radius.circular(40),
     ),
     child: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Color(0xFFFFEB3B),
+        backgroundColor: Color(0xFFffffff),
         selectedItemColor: Color(0xFF262F56),
         unselectedItemColor: Color(0xFF262F56).withOpacity(.5),
         showSelectedLabels: false,
@@ -80,7 +80,7 @@ Widget bottomNavigationBar(_selectedIndex, _onItemTapped) {
             title:
                 new Text('Profil', style: TextStyle(color: Color(0xFF262F56))),
             icon: SvgPicture.asset(
-              'assets/icons/profil.svg',
+              'assets/icons/recherche.svg',
               height: _selectedIndex == 1 ? 20.0 : 15,
               width: _selectedIndex == 1 ? 20.0 : 15,
               color: _selectedIndex == 1
@@ -89,28 +89,36 @@ Widget bottomNavigationBar(_selectedIndex, _onItemTapped) {
             ),
           ),
           BottomNavigationBarItem(
-            title: new Text('Recherche',
+            title: new Text('add',
                 style: TextStyle(color: Color(0xFF262F56))),
-            icon: SvgPicture.asset(
-              'assets/icons/recherche.svg',
-              height: _selectedIndex == 2 ? 20.0 : 15,
-              width: _selectedIndex == 2 ? 20.0 : 15,
-              color: _selectedIndex == 2
-                  ? Color(0xFF262F56)
-                  : Color(0xFF262F56).withOpacity(.5),
-            ),
+                icon: Icon(Icons.add_circle_outline, size: 40,color: Colors.grey.withOpacity(0.5),)
+            // icon: SvgPicture.asset(
+            //   'assets/icons/recherche.svg',
+            //   height: _selectedIndex == 2 ? 20.0 : 15,
+            //   width: _selectedIndex == 2 ? 20.0 : 15,
+            //   color: _selectedIndex == 2
+            //       ? Color(0xFF262F56)
+            //       : Color(0xFF262F56).withOpacity(.5),
+            // ),
+
           ),
           BottomNavigationBarItem(
             title:
                 new Text('Favoris', style: TextStyle(color: Color(0xFF262F56))),
-            icon: SvgPicture.asset(
-              'assets/icons/heart-icon.svg',
-              height: _selectedIndex == 3 ? 20.0 : 15,
-              width: _selectedIndex == 3 ? 20.0 : 15,
-              color: _selectedIndex == 3
-                  ? Color(0xFF262F56)
-                  : Color(0xFF262F56).withOpacity(.5),
-            ),
+            icon: Icon(Icons.notifications_none)
+          ),
+          BottomNavigationBarItem(
+            title:
+                new Text('Favoris', style: TextStyle(color: Color(0xFF262F56))),
+            // icon: SvgPicture.asset(
+            //   'assets/icons/heart-icon.svg',
+            //   height: _selectedIndex == 3 ? 20.0 : 15,
+            //   width: _selectedIndex == 3 ? 20.0 : 15,
+            //   color: _selectedIndex == 3
+            //       ? Color(0xFF262F56)
+            //       : Color(0xFF262F56).withOpacity(.5),
+            // ),
+            icon: CircleAvatar(backgroundColor:Colors.grey ,radius: 20, backgroundImage: NetworkImage("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Profil_Avatar_S.jpg/575px-Profil_Avatar_S.jpg"),)
           ),
         ]),
   );
