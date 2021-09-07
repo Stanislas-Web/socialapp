@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:socialapp/blocs/album.bloc.dart';
+import 'package:socialapp/models/album.model.dart';
 import 'package:socialapp/screens/home/widgets/news.widget.dart';
 import 'package:socialapp/screens/home/widgets/story.widget.dart';
 
@@ -10,6 +12,18 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadData();
+  }
+
+  void loadData() async {
+    await AlbumBloc.instance.getAllAlbum();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,9 +61,20 @@ class _HomeState extends State<Home> {
           child: Column(
             children: [
               StoryWidget(),
-              NewsWidget(),
-              SizedBox(height: 40,),
-              NewsWidget(),
+              Container(
+                height: MediaQuery.of(context).size.height,
+                child: StreamBuilder<List<AlbumModel>?>(
+                  stream: AlbumBloc.instance.stream,
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) return Text("null");
+                    return NewsWidget(data: snapshot.data);
+                  },
+                ),
+              ),
+
+              // NewsWidget(),
+              // SizedBox(height: 40,),
+              // NewsWidget(),
             ],
           ),
         ),

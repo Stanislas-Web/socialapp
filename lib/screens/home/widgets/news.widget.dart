@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:socialapp/models/album.model.dart';
+import 'package:socialapp/widgets/imageViewer.dart';
 
 class NewsWidget extends StatefulWidget {
-  const NewsWidget({ Key? key }) : super(key: key);
+  final List<AlbumModel>? data;
+  const NewsWidget({this.data});
 
   @override
   _NewsWidgetState createState() => _NewsWidgetState();
@@ -10,7 +13,10 @@ class NewsWidget extends StatefulWidget {
 class _NewsWidgetState extends State<NewsWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ListView.builder(
+      itemCount: widget.data!.length,
+      itemBuilder: (BuildContext context, int index){
+        return     Container(
       child: Column(
         children: [
           Row(
@@ -18,7 +24,7 @@ class _NewsWidgetState extends State<NewsWidget> {
             children: [
                Row(
                  children: [
-                   CircleAvatar(backgroundColor:Colors.grey ,radius: 20, backgroundImage: NetworkImage("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Profil_Avatar_S.jpg/575px-Profil_Avatar_S.jpg")),
+                   ImageViewerWidget(url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Profil_Avatar_S.jpg/575px-Profil_Avatar_S.jpg",borderRadius: BorderRadius.circular(50),width: 40,height: 40,),
                    SizedBox(
                      width: 10,
                    ),
@@ -26,7 +32,7 @@ class _NewsWidgetState extends State<NewsWidget> {
                      mainAxisAlignment: MainAxisAlignment.start,
                      crossAxisAlignment: CrossAxisAlignment.start,
                      children: [
-                       Text("Sandra Pakajda",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),),
+                       Container(width: MediaQuery.of(context).size.width / 2  ,child: Text(widget.data![index].title,overflow: TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),)),
                        Text("il y'a une heure")
                      ],
                    ),
@@ -38,16 +44,41 @@ class _NewsWidgetState extends State<NewsWidget> {
           SizedBox(height: 20,),
           Container(
             margin: EdgeInsets.only(left: 50),
-            width: MediaQuery.of(context).size.width,
-            height: 250,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(image: NetworkImage("https://www.leparisien.fr/resizer/sBHwgPb-95-TKpWGJIBbSAlgvD4=/932x582/cloudfront-eu-central-1.images.arcpublishing.com/leparisien/OOOVADTUDJG5XD2AGKRY5X4BCM.jpg"),fit: BoxFit.cover,)
-            ),
+            child: Column(
+              children: [
+                Container(
+                  child: ImageViewerWidget(
+                    url: widget.data![index].thumbnailUrl,
+                    width: MediaQuery.of(context).size.width,
+                    height: 250,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                SizedBox(height: 10,),
+                Row(
+                  children: [
+                    Icon(Icons.favorite_border,color: Colors.black38,),
+                    SizedBox(width: 10,),
+                    Text("10k", style: TextStyle(color: Colors.black38),),
+                    SizedBox(width: 30,),
+                    Icon(Icons.textsms_outlined,color: Colors.black38,),
+                    SizedBox(width: 10,),
+                    Text("5k", style: TextStyle(color: Colors.black38),),
+                    // SizedBox(width: 30,),
+                    // Icon(Icons.favorite_border,color: Colors.black38,),
+                    // SizedBox(width: 10,),
+                    // Text("10k", style: TextStyle(color: Colors.black38),),
 
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),
+    );
+
+      }    
     );
   }
 }
