@@ -66,7 +66,7 @@ class _HomeState extends State<Home> {
                 child: StreamBuilder<List<AlbumModel>?>(
                   stream: AlbumBloc.instance.stream,
                   builder: (context, snapshot) {
-                    if (!snapshot.hasData) return Text("null");
+                    if (!snapshot.hasData) return Center(child: CircularProgressIndicator(color: Colors.black12,));
                     return NewsWidget(data: snapshot.data);
                   },
                 ),

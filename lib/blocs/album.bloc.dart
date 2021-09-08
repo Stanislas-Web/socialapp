@@ -17,6 +17,11 @@ class AlbumBloc {
   Sink<List<AlbumModel>?> get albumSink => _albumSubject.sink;
 
   Future<List<AlbumModel>> getAllAlbum() async {
+    // if(){
+
+    // }else{
+
+    // }
     var data = await (AlbumService.instance.getAlbums());
     albumSink.add(data);
     return data;
